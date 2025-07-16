@@ -1,44 +1,41 @@
-# 🚀 My Neovim Configuration
+# 🚀 Modern Neovim Configuration
 
-A modern, feature-rich Neovim configuration focused on productivity, note-taking, and development across multiple languages.
+A clean, modern Neovim configuration focused on productivity and development across multiple languages with a streamlined setup.
 
 ## ✨ Features
 
 ### 🎨 **Beautiful UI**
 - **Tokyo Night** color scheme with storm variant
-- **Bubble-style Lualine** status bar with rounded segments
-- **Indent guides** with clean visual styling
-- **Todo comments** highlighting with custom icons
+- **Lualine** status bar with clean styling
+- **Indent guides** with visual clarity
+- **Todo comments** highlighting
 - **Zen mode** for distraction-free writing
-- **Twilight** dimming for focus enhancement
+- **Twilight** dimming for focus
+
+### 📁 **File Management**
+- **nnn.nvim** - Fast, minimal file explorer with picker mode
+- **Telescope** - Fuzzy finding and advanced search
+- **Intelligent file navigation** with contextual commands
 
 ### 📝 **Note-Taking & Organization**
 - **Neorg** - Modern note-taking with multiple workspaces
 - **Orgmode** integration for task management
 - **Journal** system with daily notes
 - **Multiple workspaces**: Notes, Work, Projects, Journal
-- **Export capabilities** to Markdown and other formats
-- **Task management** with various todo states
 
-### 🔍 **Search & Navigation**
-- **Telescope** with fuzzy finding and advanced search
-- **Treesitter** for enhanced syntax highlighting
-- **LSP integration** for intelligent code navigation
-- **File explorer** with Neo-tree support
-
-### 💻 **Development Tools**
+###  **Development Tools**
 - **Multi-language LSP** support (Lua, Python, TypeScript, Go, Rust, YAML, SQL, Markdown)
+- **Mason** for LSP server management
 - **Auto-completion** with nvim-cmp
-- **Diagnostics** with beautiful icons and floating windows
-- **Code formatting** and linting
-- **Git integration** with branch display
+- **Treesitter** for enhanced syntax highlighting
+- **Diagnostics** with clear visual indicators
+- **Basic SQL support** with completion and formatting
 
 ### ⚡ **Performance & UX**
 - **Lazy loading** for fast startup
 - **Which-key** for discoverable keybindings
 - **Auto-pairs** and **surround** for efficient editing
-- **Noice** for enhanced command line and notifications
-- **Global status line** across all windows
+- **Streamlined configuration** with minimal complexity
 
 ## 📦 Plugin Overview
 
@@ -48,6 +45,9 @@ A modern, feature-rich Neovim configuration focused on productivity, note-taking
 - **[nvim-cmp](https://github.com/hrsh7th/nvim-cmp)** - Completion engine
 - **[telescope.nvim](https://github.com/nvim-telescope/telescope.nvim)** - Fuzzy finder
 - **[nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)** - Syntax highlighting
+
+### File Management
+- **[nnn.nvim](https://github.com/luukvbaal/nnn.nvim)** - File explorer integration
 
 ### UI & Themes
 - **[tokyonight.nvim](https://github.com/folke/tokyonight.nvim)** - Color scheme
@@ -65,25 +65,50 @@ A modern, feature-rich Neovim configuration focused on productivity, note-taking
 - **[mason.nvim](https://github.com/williamboman/mason.nvim)** - LSP server management
 - **[go.nvim](https://github.com/ray-x/go.nvim)** - Go development tools
 - **[todo-comments.nvim](https://github.com/folke/todo-comments.nvim)** - Todo highlighting
+- **[playground](https://github.com/nvim-treesitter/playground)** - Treesitter playground for syntax exploration
+
+### SQL Support
+- **[SQLComplete.vim](https://github.com/vim-scripts/SQLComplete.vim)** - SQL completion
+- **[vim-uppercase-sql](https://github.com/jsborjesson/vim-uppercase-sql)** - SQL formatting
 
 ### Quality of Life
 - **[which-key.nvim](https://github.com/folke/which-key.nvim)** - Keybinding help
 - **[mini.pairs](https://github.com/echasnovski/mini.pairs)** - Auto-pairs
 - **[mini.surround](https://github.com/echasnovski/mini.surround)** - Surround text objects
 - **[noice.nvim](https://github.com/folke/noice.nvim)** - Enhanced UI
-- **[nvim-notify](https://github.com/rcarriga/nvim-notify)** - Notification system
 
 ## 🔧 Installation
+
+### Automated Installation
+
+The easiest way to install this configuration is using the provided install script:
+
+```bash
+# Clone the repository
+git clone https://github.com/your-username/nvim-config.git ~/.config/nvim
+
+# Navigate to the directory
+cd ~/.config/nvim
+
+# Make the install script executable and run it
+chmod +x install.sh
+./install.sh
+```
+
+### Manual Installation
+
+If you prefer to install manually:
 
 ### Prerequisites
 - **Neovim 0.8+** (recommended: 0.9+)
 - **Git**
+- **nnn** file manager (recommended: `brew install nnn` on macOS)
 - **Node.js** (for LSP servers)
 - **Python 3** (for Python LSP)
 - **Go** (for Go development)
 - **Rust** (for Rust development)
 
-### Setup
+### Setup Steps
 1. **Backup your existing configuration**:
    ```bash
    mv ~/.config/nvim ~/.config/nvim.backup
@@ -91,7 +116,7 @@ A modern, feature-rich Neovim configuration focused on productivity, note-taking
 
 2. **Clone this configuration**:
    ```bash
-   git clone <your-repo-url> ~/.config/nvim
+   git clone https://github.com/your-username/nvim-config.git ~/.config/nvim
    ```
 
 3. **Create workspace directories**:
@@ -99,19 +124,44 @@ A modern, feature-rich Neovim configuration focused on productivity, note-taking
    mkdir -p ~/notes ~/work-notes ~/projects ~/journal ~/orgfiles
    ```
 
-4. **Start Neovim**:
+4. **Start Neovim and install plugins**:
    ```bash
    nvim
+   # Plugins will install automatically
    ```
 
-5. **Install plugins** (automatic on first run):
-   ```
-   :Lazy sync
-   ```
+### Using the Makefile
 
-6. **Install LSP servers**:
-   ```
-   :Mason
+The configuration includes a Makefile for easy management:
+
+```bash
+# Full installation
+make install
+
+# Test configuration
+make test
+
+# Lint code
+make lint
+
+# Format code
+make format
+
+# Clean up
+make clean
+
+# Create backup
+make backup
+
+# Update plugins
+make update
+
+# Health check
+make health
+
+# Show help
+make help
+```
    ```
 
 ## ⌨️ Key Bindings
@@ -120,14 +170,21 @@ A modern, feature-rich Neovim configuration focused on productivity, note-taking
 - **Leader**: `<Space>`
 - **Local Leader**: `,`
 
-### Core Navigation
+### File Navigation
 | Key | Action |
 |-----|--------|
-| `<leader>pv` | File explorer |
-| `<leader>ff` | Find files |
-| `<leader>fg` | Live grep |
-| `<leader>fb` | Find buffers |
-| `<leader>fh` | Help tags |
+| `<leader>pv` | Open nnn file picker |
+| `<leader>e` | Open nnn file picker |
+| `<leader>ef` | Open nnn in current file's directory |
+| `<C-b>` | Open nnn picker (VS Code style) |
+
+### Search & Navigation
+| Key | Action |
+|-----|--------|
+| `<leader>ff` | Find files (global) |
+| `<leader>fF` | Find files (current directory) |
+| `<leader>fg` | Live grep (global) |
+| `<leader>fG` | Live grep (current directory) |
 
 ### Neorg & Note-Taking
 | Key | Action |
@@ -136,12 +193,7 @@ A modern, feature-rich Neovim configuration focused on productivity, note-taking
 | `<leader>nw` | Work workspace |
 | `<leader>np` | Projects workspace |
 | `<leader>nj` | Journal workspace |
-| `<leader>jt` | Today's journal |
-| `<leader>jy` | Yesterday's journal |
-| `<leader>jm` | Tomorrow's journal |
-| `<leader>td` | Mark task done |
-| `<leader>tu` | Mark task undone |
-| `<leader>tp` | Mark task pending |
+| `<leader>pn` | Create new note |
 
 ### LSP & Development
 | Key | Action |
@@ -156,15 +208,36 @@ A modern, feature-rich Neovim configuration focused on productivity, note-taking
 | `[d` | Previous diagnostic |
 | `]d` | Next diagnostic |
 
+### Telescope LSP
+| Key | Action |
+|-----|--------|
+| `<leader>fd` | LSP definitions |
+| `<leader>fr` | LSP references |
+| `<leader>fi` | LSP implementations |
+| `<leader>fs` | Document symbols |
+| `<leader>fw` | Workspace symbols |
+
+### SQL Support
+| Key | Action |
+|-----|--------|
+| `<leader>sf` | Set filetype to SQL |
+| `<leader>su` | Uppercase SQL keywords |
+
+### Treesitter Playground
+| Key | Action |
+|-----|--------|
+| `<leader>tp` | Toggle Treesitter playground |
+| `<leader>th` | Highlight captures under cursor |
+
 ### UI & Windows
 | Key | Action |
 |-----|--------|
 | `<leader>db` | Dashboard |
-| `<leader>nc` | Toggle concealer |
-| `<leader>no` | Presenter mode |
+| `<leader>h` | Home screen |
 | `<C-h/j/k/l>` | Navigate windows |
 | `<leader>w` | Save file |
 | `<leader>q` | Quit |
+| `<leader>cl` | Clear search highlighting |
 
 ## 🎨 Customization
 
@@ -206,36 +279,51 @@ ensure_installed = {
 ~/.config/nvim/
 ├── init.lua                    # Main configuration entry
 ├── lazy-lock.json             # Plugin lock file
+├── install.sh                 # Installation script
+├── Makefile                   # Build and management tasks
+├── README.md                  # This file
 ├── lua/
 │   ├── config/
 │   │   └── lazy.lua           # Lazy.nvim setup
 │   ├── plugins/
 │   │   ├── dashboard.lua      # Dashboard configuration
-│   │   ├── data.lua           # Data management
+│   │   ├── data.lua           # Basic SQL and data tools
 │   │   ├── journal.lua        # Journal setup
 │   │   ├── lsp.lua            # LSP configuration
 │   │   ├── mason.lua          # Mason setup
 │   │   ├── neorg.lua          # Neorg configuration
-│   │   ├── plugins.lua        # Main plugins
+│   │   ├── nnn.lua            # nnn file explorer
+│   │   ├── plugins.lua        # Core plugins
 │   │   ├── telescope.lua      # Telescope setup
 │   │   └── treesitter.lua     # Treesitter config
-│   └── user/
-│       ├── lsp.lua            # User LSP settings
-│       ├── options.lua        # Vim options
-│       └── remap.lua          # Key mappings
-└── after/
-    └── plugin/
-        └── telescope.lua      # Telescope post-config
+│   ├── user/
+│   │   ├── lsp.lua            # User LSP settings
+│   │   ├── options.lua        # Vim options
+│   │   └── remap.lua          # Key mappings
+│   └── after/
+│       ├── ftdetect/
+│       │   └── sql-jinja.lua  # SQL filetype detection
+│       ├── ftplugin/
+│       │   └── sql.lua        # SQL plugin settings
+│       └── plugin/
+│           └── telescope.lua  # Telescope post-config
 ```
 
 ## 🌟 Workflow Examples
 
+### File Management Workflow
+1. **Open file picker**: `<leader>pv` or `<leader>e`
+2. **Find files globally**: `<leader>ff`
+3. **Find files in current directory**: `<leader>fF`
+4. **Search content**: `<leader>fg`
+5. **Navigate with splits**: Use `<C-s>` and `<C-v>` in nnn
+
 ### Note-Taking Workflow
 1. **Start with dashboard**: `<leader>db`
-2. **Open journal**: `<leader>jt`
-3. **Create new note**: `<leader>nf`
-4. **Search notes**: `<leader>nff`
-5. **Link notes**: `<leader>nfi`
+2. **Open notes workspace**: `<leader>nn`
+3. **Create new note**: `<leader>pn`
+4. **Switch to work notes**: `<leader>nw`
+5. **Open journal**: `<leader>nj`
 
 ### Development Workflow
 1. **Open project**: `<leader>ff`
@@ -243,12 +331,12 @@ ensure_installed = {
 3. **Go to definition**: `gd`
 4. **Find references**: `gr`
 5. **Format code**: `<leader>f`
+6. **Check diagnostics**: `[d` and `]d`
 
-### Task Management
-1. **Create tasks** in Neorg files
-2. **Mark done**: `<leader>td`
-3. **Find tasks**: `<leader>nft`
-4. **Export to markdown**: `<leader>ne`
+### SQL Development
+1. **Set SQL filetype**: `<leader>sf`
+2. **Uppercase SQL keywords**: `<leader>su`
+3. **Use LSP features**: `gd`, `gr`, `K` for hover
 
 ## 🔧 Troubleshooting
 
@@ -272,9 +360,39 @@ ensure_installed = {
 :Lazy sync
 ```
 
-**Neorg not loading**:
-- Check workspace directories exist
-- Verify file extensions are `.norg`
+**nnn file manager not working**:
+- Install nnn: `brew install nnn` (macOS) or your package manager
+- Check if nnn is in PATH: `which nnn`
+
+**Configuration errors**:
+```bash
+# Run health check
+make health
+
+# Test configuration
+make test
+
+# Clean and reinstall
+make clean
+make install
+```
+
+### Development Tools
+
+**Install linting and formatting tools**:
+```bash
+make dev-setup
+```
+
+**Format code**:
+```bash
+make format
+```
+
+**Lint code**:
+```bash
+make lint
+```
 
 ## 📚 Learning Resources
 
@@ -282,10 +400,11 @@ ensure_installed = {
 - **[Neorg Wiki](https://github.com/nvim-neorg/neorg/wiki)**
 - **[Lazy.nvim Documentation](https://lazy.folke.io/)**
 - **[Telescope Documentation](https://github.com/nvim-telescope/telescope.nvim#usage)**
+- **[nnn Documentation](https://github.com/jarun/nnn)**
 
 ## 🤝 Contributing
 
-Feel free to:
+This configuration is designed to be clean and maintainable. Feel free to:
 - Submit bug reports
 - Suggest improvements
 - Share your customizations

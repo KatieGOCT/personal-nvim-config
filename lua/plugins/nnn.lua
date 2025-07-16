@@ -20,27 +20,32 @@ return {
 					{ "<C-s>", builtin.open_in_split },
 					{ "<C-v>", builtin.open_in_vsplit },
 					{ "<C-x>", builtin.open_in_split },      -- Alternative horizontal split
-					{ "<C-z>", builtin.open_in_vsplit },     -- Alternative vertical split  
+					{ "<C-z>", builtin.open_in_vsplit },     -- Alternative vertical split
 					{ "<C-o>", builtin.copy_to_clipboard },
 					{ "<C-w>", builtin.cd_to_path },
 					{ "<C-y>", builtin.copy_to_clipboard },
 					{ "<C-e>", builtin.populate_cmdline },
 				},
-				windownav = {
-					left = "<C-w>h",
-					down = "<C-w>j",
-					up = "<C-w>k",
-					right = "<C-w>l",
-					next = "<C-w>w",
+				explorer = {
+					cmd = "nnn",
+					width = 24,
+					side = "topleft",
+					session = "",
+					tabs = true,
+					fullscreen = false,
 				},
-				layout = {
-					window = {
-						width = 0.25,  -- Slightly narrower for tree view
-						height = 1.0, -- Full height
-						xoffset = 0.0, -- Left side
-						yoffset = 0.0, -- Top
+				picker = {
+					cmd = "nnn",
+					style = {
+						width = 0.8,     -- Larger picker window
+						height = 0.8,    -- Larger picker window
+						xoffset = 0.5,   -- Centered
+						yoffset = 0.5,   -- Centered
+						border = "rounded"
 					},
-					split = "vertical", -- Use vertical split for sidebar
+					session = "",
+					tabs = true,
+					fullscreen = false,
 				},
 				auto_open = {
 					setup = nil,
@@ -53,21 +58,12 @@ return {
 						"hgcommit",
 					},
 				},
-				auto_close = false, -- Keep it open like VS Code
+				auto_close = false,
 				offset = false,
 				session = "",
 				tabs = true,
-				picker = {
-					cmd = "nnn",
-					style = {
-						width = 0.3,  -- Sidebar width
-						height = 1.0, -- Full height
-						xoffset = 0.0, -- Left side
-						yoffset = 0.0, -- Top
-					},
-					session = "",
-					tabs = true,
-				},
+				buflisted = false,
+				quitcd = nil,
 			})
 		end,
 	},
