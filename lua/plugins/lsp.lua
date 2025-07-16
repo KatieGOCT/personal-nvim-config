@@ -15,6 +15,9 @@ return {
 					"ts_ls",
 					"gopls",
 					"rust_analyzer",
+					"yamlls",
+					"sqlls",
+					"marksman",
 				},
 				automatic_installation = true,
 			})
@@ -133,6 +136,50 @@ return {
 					},
 				},
 			})
+
+			-- YAML LSP
+			lspconfig.yamlls.setup({
+				on_attach = on_attach,
+				capabilities = capabilities,
+				settings = {
+					yaml = {
+						schemas = {
+							["https://json.schemastore.org/github-workflow.json"] = "/.github/workflows/*",
+							["https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json"] = "/docker-compose*.yml",
+							["https://json.schemastore.org/kustomization.json"] = "/kustomization.yaml",
+							["https://json.schemastore.org/chart.json"] = "/Chart.yaml",
+							-- DBT schemas
+							["https://raw.githubusercontent.com/dbt-labs/dbt-jsonschema/main/schemas/dbt_yml_files.json"] = {
+								"/models/**/*.yml",
+								"/models/**/*.yaml",
+								"/analysis/**/*.yml",
+								"/analysis/**/*.yaml",
+								"/macros/**/*.yml",
+								"/macros/**/*.yaml",
+								"/data/**/*.yml",
+								"/data/**/*.yaml",
+								"/snapshots/**/*.yml",
+								"/snapshots/**/*.yaml",
+								"dbt_project.yml",
+								"packages.yml",
+								"selectors.yml",
+								"profiles.yml",
+							},
+						},
+					},
+				},
+			})
+			-- SQL LSP
+			lspconfig.sqlls.setup({
+				on_attach = on_attach,
+				capabilities = capabilities,
+			})
+
+			-- Markdown LSP
+			lspconfig.marksman.setup({
+				on_attach = on_attach,
+				capabilities = capabilities,
+			})
 		end,
 	},
 	{
@@ -191,8 +238,10 @@ return {
 				sources = cmp.config.sources({
 					{ name = "nvim_lsp" },
 					{ name = "luasnip" },
+					{ name = "neorg" },
 				}, {
 					{ name = "buffer" },
+					{ name = "path" },
 				}),
 			})
 
