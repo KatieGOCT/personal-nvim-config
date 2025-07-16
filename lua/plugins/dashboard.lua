@@ -22,12 +22,12 @@ return {
 
 			-- Custom center items
 			db.custom_center = {
-                {
+				{
 					icon = "🧠 ",
 					desc = "Second Me                              ",
-					action = "edit /Users/katie.gilmour/notes/me_2/index.norg",
+					action = "edit ~/notes/me_2/index.norg",
 					key = "i",
-				}, 
+				},
 				{
 					icon = "  ",
 					desc = "Find file                              ",
@@ -59,9 +59,9 @@ return {
 					key = "c",
 				},
 				{
-					icon = "  ",
-					desc = "File explorer                          ",
-					action = "Ex",
+					icon = "🌲 ",
+					desc = "File tree (nnn)                        ",
+					action = "NnnExplorer",
 					key = "e",
 				},
 				{
