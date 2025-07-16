@@ -10,21 +10,21 @@ return {
 			-- Enable tree view by default
 			vim.env.NNN_CONTEXT_COLORS = '1234'
 			
+			local builtin = require("nnn").builtin
 			require("nnn").setup({
 				command = "nnn -o", -- Simplified command to ensure it works
 				set_default_mappings = false,
 				replace_netrw = "picker", -- Replace netrw with nnn picker
-				action = {
-					["<c-t>"] = "tab_switch",
-					["<c-s>"] = "split",
-					["<c-v>"] = "vsplit",
-					["<c-o>"] = "copy_to_clipboard",
-					["<c-w>"] = "cd",
-					["<c-y>"] = "yank_path",
-					["<c-e>"] = "populate_cmdline",
-					["<c-d>"] = "populate_cmdline",
-					["<c-l>"] = "populate_cmdline",
-					["<c-r>"] = "populate_cmdline",
+				mappings = {
+					{ "<C-t>", builtin.open_in_tab },
+					{ "<C-s>", builtin.open_in_split },
+					{ "<C-v>", builtin.open_in_vsplit },
+					{ "<C-x>", builtin.open_in_split },      -- Alternative horizontal split
+					{ "<C-z>", builtin.open_in_vsplit },     -- Alternative vertical split  
+					{ "<C-o>", builtin.copy_to_clipboard },
+					{ "<C-w>", builtin.cd_to_path },
+					{ "<C-y>", builtin.copy_to_clipboard },
+					{ "<C-e>", builtin.populate_cmdline },
 				},
 				windownav = {
 					left = "<C-w>h",
