@@ -7,12 +7,12 @@ vim.keymap.set("n", "<leader>pv", function()
 	local current_file = vim.fn.expand("%:p")
 	if current_file == "" then
 		-- If no file is open, use current working directory
-		vim.cmd("NnnExplorer")
+		vim.cmd("NnnPicker")
 	else
 		-- Open nnn in the directory of the current file
-		vim.cmd("NnnExplorer " .. vim.fn.expand("%:p:h"))
+		vim.cmd("NnnPicker " .. vim.fn.expand("%:p:h"))
 	end
-end, { desc = "Open nnn tree in current file directory" })
+end, { desc = "Open nnn picker in current file directory" })
 
 -- Dashboard keymaps
 vim.keymap.set("n", "<leader>db", ":Dashboard<CR>", { desc = "Open Dashboard" })
@@ -104,24 +104,32 @@ vim.keymap.set("n", "<leader>tw", ":set wrap!<CR>", { desc = "Toggle wrap" })
 -- Toggle spell check
 vim.keymap.set("n", "<leader>ts", ":set spell!<CR>", { desc = "Toggle spell check" })
 
--- File tree keymaps (nnn tree view)
-vim.keymap.set("n", "<leader>e", ":NnnExplorer<CR>", { desc = "Open nnn tree" })
-vim.keymap.set("n", "<C-b>", ":NnnExplorer<CR>", { desc = "Open nnn tree (VS Code style)" })
+-- File picker keymaps (nnn picker)
+vim.keymap.set("n", "<leader>e", ":NnnPicker<CR>", { desc = "Open nnn picker" })
+vim.keymap.set("n", "<C-b>", ":NnnPicker<CR>", { desc = "Open nnn picker (VS Code style)" })
 vim.keymap.set("n", "<leader>ef", function()
 	local current_file = vim.fn.expand("%:p")
 	if current_file == "" then
 		-- If no file is open, use current working directory
-		vim.cmd("NnnExplorer")
+		vim.cmd("NnnPicker")
 	else
 		-- Open nnn in the directory of the current file
-		vim.cmd("NnnExplorer " .. vim.fn.expand("%:p:h"))
+		vim.cmd("NnnPicker " .. vim.fn.expand("%:p:h"))
 	end
-end, { desc = "Find current file in nnn tree" })
-vim.keymap.set("n", "<leader>er", ":NnnExplorer<CR>", { desc = "Refresh nnn tree" })
-vim.keymap.set("n", "<leader>eo", ":NnnExplorer<CR>", { desc = "Open nnn tree" })
-vim.keymap.set("n", "<leader>eq", ":q<CR>", { desc = "Close nnn tree" })
+end, { desc = "Find current file in nnn picker" })
+vim.keymap.set("n", "<leader>er", ":NnnPicker<CR>", { desc = "Open nnn picker" })
+vim.keymap.set("n", "<leader>eo", ":NnnPicker<CR>", { desc = "Open nnn picker" })
 
 -- nnn file manager keymaps (additional)
 vim.keymap.set("n", "<leader>fp", ":NnnPicker<CR>", { desc = "Open nnn picker" })
-vim.keymap.set("n", "<leader>fn", ":NnnExplorer %:p:h<CR>", { desc = "Open nnn in current directory" })
-vim.keymap.set("n", "<leader>eb", "<C-w>l", { desc = "Focus back on file from nnn" })
+vim.keymap.set("n", "<leader>fn", ":NnnPicker %:p:h<CR>", { desc = "Open nnn picker in current directory" })
+vim.keymap.set("n", "<leader>fe", ":NnnExplorer<CR>", { desc = "Open nnn explorer (sidebar)" })
+
+-- SQL keymaps
+vim.keymap.set("n", "<leader>sf", ":set filetype=sql<CR>", { desc = "Set filetype to SQL" })
+vim.keymap.set("n", "<leader>su", ":SQLUpper<CR>", { desc = "Uppercase SQL keywords" })
+vim.keymap.set("v", "<leader>su", ":SQLUpper<CR>", { desc = "Uppercase SQL keywords (visual)" })
+
+-- Treesitter Playground keymaps
+vim.keymap.set("n", "<leader>tp", ":TSPlaygroundToggle<CR>", { desc = "Toggle Treesitter playground" })
+vim.keymap.set("n", "<leader>th", ":TSHighlightCapturesUnderCursor<CR>", { desc = "Highlight captures under cursor" })
