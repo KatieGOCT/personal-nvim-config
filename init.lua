@@ -3,6 +3,7 @@ require("user.remap")
 
 require("config.lazy")
 require("user.options")
+require("user.lsp")
 require("after.plugin.telescope")
 require'nvim-treesitter.configs'.setup {
   highlight = {
@@ -19,4 +20,6 @@ vim.cmd("colorscheme tokyonight-night")
 -- options
 vim.opt.spell = true
 vim.opt.spelllang = "en_us"
+vim.opt.wrap = false
+
 
