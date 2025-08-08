@@ -81,7 +81,9 @@ return {
 			-- Custom footer
 			db.custom_footer = {
 				"",
-				"⚡ Neovim loaded " .. vim.fn.len(vim.fn.globpath(vim.fn.stdpath("data") .. "/lazy", "*", 0, 1)) .. " plugins",
+				"⚡ Neovim loaded "
+					.. vim.fn.len(vim.fn.globpath(vim.fn.stdpath("data") .. "/lazy", "*", 0, 1))
+					.. " plugins",
 				"",
 				"💡 Today is " .. os.date("%A, %B %d, %Y"),
 			}

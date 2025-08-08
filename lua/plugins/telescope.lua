@@ -1,15 +1,15 @@
 return {
 	{
-		'nvim-telescope/telescope.nvim',
-		tag = '0.1.8',
+		"nvim-telescope/telescope.nvim",
+		tag = "0.1.8",
 		dependencies = {
-			'nvim-lua/plenary.nvim',
-			'nvim-telescope/telescope-fzf-native.nvim',
+			"nvim-lua/plenary.nvim",
+			"nvim-telescope/telescope-fzf-native.nvim",
 		},
 		config = function()
-			local telescope = require('telescope')
-			local actions = require('telescope.actions')
-			
+			local telescope = require("telescope")
+			local actions = require("telescope.actions")
+
 			telescope.setup({
 				defaults = {
 					mappings = {
@@ -98,32 +98,32 @@ return {
 					},
 				},
 			})
-			
+
 			-- Load extensions
-			telescope.load_extension('fzf')
-			
+			telescope.load_extension("fzf")
+
 			-- Global telescope keymaps
-			local builtin = require('telescope.builtin')
-			vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Find files' })
-			vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = 'Live grep' })
-			vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'Find buffers' })
-			vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Help tags' })
-			vim.keymap.set('n', '<leader>fr', builtin.oldfiles, { desc = 'Recent files' })
-			vim.keymap.set('n', '<leader>fc', builtin.commands, { desc = 'Commands' })
-			vim.keymap.set('n', '<leader>fk', builtin.keymaps, { desc = 'Keymaps' })
-			vim.keymap.set('n', '<leader>fm', builtin.man_pages, { desc = 'Man pages' })
-			vim.keymap.set('n', '<leader>fo', builtin.vim_options, { desc = 'Vim options' })
-			vim.keymap.set('n', '<leader>ft', builtin.builtin, { desc = 'Telescope builtin' })
-			vim.keymap.set('n', '<leader>fs', builtin.grep_string, { desc = 'Grep string' })
-			vim.keymap.set('n', '<leader>fq', builtin.quickfix, { desc = 'Quickfix' })
-			vim.keymap.set('n', '<leader>fl', builtin.loclist, { desc = 'Location list' })
-			vim.keymap.set('n', '<leader>fj', builtin.jumplist, { desc = 'Jump list' })
-			vim.keymap.set('n', '<leader>fp', builtin.planets, { desc = 'Planets' })
-			vim.keymap.set('n', '<leader>fz', builtin.current_buffer_fuzzy_find, { desc = 'Fuzzy find in buffer' })
+			local builtin = require("telescope.builtin")
+			vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "Find files" })
+			vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "Live grep" })
+			vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "Find buffers" })
+			vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "Help tags" })
+			vim.keymap.set("n", "<leader>fr", builtin.oldfiles, { desc = "Recent files" })
+			vim.keymap.set("n", "<leader>fc", builtin.commands, { desc = "Commands" })
+			vim.keymap.set("n", "<leader>fk", builtin.keymaps, { desc = "Keymaps" })
+			vim.keymap.set("n", "<leader>fm", builtin.man_pages, { desc = "Man pages" })
+			vim.keymap.set("n", "<leader>fo", builtin.vim_options, { desc = "Vim options" })
+			vim.keymap.set("n", "<leader>ft", builtin.builtin, { desc = "Telescope builtin" })
+			vim.keymap.set("n", "<leader>fs", builtin.grep_string, { desc = "Grep string" })
+			vim.keymap.set("n", "<leader>fq", builtin.quickfix, { desc = "Quickfix" })
+			vim.keymap.set("n", "<leader>fl", builtin.loclist, { desc = "Location list" })
+			vim.keymap.set("n", "<leader>fj", builtin.jumplist, { desc = "Jump list" })
+			vim.keymap.set("n", "<leader>fp", builtin.planets, { desc = "Planets" })
+			vim.keymap.set("n", "<leader>fz", builtin.current_buffer_fuzzy_find, { desc = "Fuzzy find in buffer" })
 		end,
 	},
 	{
-		'nvim-telescope/telescope-fzf-native.nvim',
-		build = 'make'
+		"nvim-telescope/telescope-fzf-native.nvim",
+		build = "make",
 	},
 }
