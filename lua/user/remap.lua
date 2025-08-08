@@ -133,3 +133,52 @@ vim.keymap.set("v", "<leader>su", ":SQLUpper<CR>", { desc = "Uppercase SQL keywo
 -- Treesitter Playground keymaps
 vim.keymap.set("n", "<leader>tp", ":TSPlaygroundToggle<CR>", { desc = "Toggle Treesitter playground" })
 vim.keymap.set("n", "<leader>th", ":TSHighlightCapturesUnderCursor<CR>", { desc = "Highlight captures under cursor" })
+
+-- Blur tint toggle
+local blur_tint_enabled = true
+vim.keymap.set("n", "<leader>tb", function()
+	if blur_tint_enabled then
+		-- Disable blur tint (pure transparency)
+		vim.cmd([[
+			highlight Normal guibg=none ctermbg=none
+			highlight NormalFloat guibg=none ctermbg=none
+			highlight Pmenu guibg=none ctermbg=none
+			highlight StatusLine guibg=none ctermbg=none
+			highlight StatusLineNC guibg=none ctermbg=none
+			highlight TabLine guibg=none ctermbg=none
+			highlight CursorLine guibg=none ctermbg=none
+		]])
+		blur_tint_enabled = false
+		vim.notify("Blur tint disabled", vim.log.levels.INFO)
+	else
+		-- Enable blur tint
+		vim.cmd([[
+			highlight Normal guibg=#1a1b26 guifg=#c0caf5 ctermbg=none
+			highlight NormalFloat guibg=#16161e guifg=#c0caf5 ctermbg=none
+			highlight Pmenu guibg=#16161e guifg=#c0caf5 ctermbg=none
+			highlight PmenuSel guibg=#283457 guifg=#c0caf5 ctermbg=none
+			highlight StatusLine guibg=#16161e guifg=#c0caf5 ctermbg=none
+			highlight StatusLineNC guibg=#16161e guifg=#565f89 ctermbg=none
+			highlight TabLine guibg=#16161e guifg=#565f89 ctermbg=none
+			highlight TabLineSel guibg=#283457 guifg=#c0caf5 ctermbg=none
+			highlight CursorLine guibg=#202331 ctermbg=none
+			highlight Visual guibg=#283457 ctermbg=none
+			highlight Search guibg=#3d59a1 ctermbg=none
+		]])
+		blur_tint_enabled = true
+		vim.notify("Blur tint enabled", vim.log.levels.INFO)
+	end
+end, { desc = "Toggle blur tint effect" })
+
+-- Macro debugging helper
+vim.keymap.set("n", "<leader>mr", function()
+	local reg = vim.fn.input("Check register: ")
+	if reg ~= "" then
+		local content = vim.fn.getreg(reg)
+		if content == "" then
+			vim.notify("Register '" .. reg .. "' is empty", vim.log.levels.WARN)
+		else
+			vim.notify("Register '" .. reg .. "' contains: " .. vim.fn.string(content), vim.log.levels.INFO)
+		end
+	end
+end, { desc = "Check macro register content" })

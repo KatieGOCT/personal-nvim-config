@@ -30,18 +30,42 @@ return {
 				local opts = { buffer = bufnr, remap = false }
 
 				-- LSP keymaps
-				vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
-				vim.keymap.set("n", "gD", function() vim.lsp.buf.declaration() end, opts)
-				vim.keymap.set("n", "gi", function() vim.lsp.buf.implementation() end, opts)
-				vim.keymap.set("n", "gr", function() vim.lsp.buf.references() end, opts)
-				vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
-				vim.keymap.set("n", "<C-k>", function() vim.lsp.buf.signature_help() end, opts)
-				vim.keymap.set("n", "<leader>rn", function() vim.lsp.buf.rename() end, opts)
-				vim.keymap.set("n", "<leader>ca", function() vim.lsp.buf.code_action() end, opts)
-				vim.keymap.set("n", "<leader>f", function() vim.lsp.buf.format() end, opts)
-				vim.keymap.set("n", "<leader>d", function() vim.diagnostic.open_float() end, opts)
-				vim.keymap.set("n", "[d", function() vim.diagnostic.goto_prev() end, opts)
-				vim.keymap.set("n", "]d", function() vim.diagnostic.goto_next() end, opts)
+				vim.keymap.set("n", "gd", function()
+					vim.lsp.buf.definition()
+				end, opts)
+				vim.keymap.set("n", "gD", function()
+					vim.lsp.buf.declaration()
+				end, opts)
+				vim.keymap.set("n", "gi", function()
+					vim.lsp.buf.implementation()
+				end, opts)
+				vim.keymap.set("n", "gr", function()
+					vim.lsp.buf.references()
+				end, opts)
+				vim.keymap.set("n", "K", function()
+					vim.lsp.buf.hover()
+				end, opts)
+				vim.keymap.set("n", "<C-k>", function()
+					vim.lsp.buf.signature_help()
+				end, opts)
+				vim.keymap.set("n", "<leader>rn", function()
+					vim.lsp.buf.rename()
+				end, opts)
+				vim.keymap.set("n", "<leader>ca", function()
+					vim.lsp.buf.code_action()
+				end, opts)
+				vim.keymap.set("n", "<leader>f", function()
+					vim.lsp.buf.format()
+				end, opts)
+				vim.keymap.set("n", "<leader>d", function()
+					vim.diagnostic.open_float()
+				end, opts)
+				vim.keymap.set("n", "[d", function()
+					vim.diagnostic.goto_prev()
+				end, opts)
+				vim.keymap.set("n", "]d", function()
+					vim.diagnostic.goto_next()
+				end, opts)
 			end
 
 			-- Configure diagnostic signs
@@ -49,7 +73,7 @@ return {
 				Error = " ",
 				Warn = " ",
 				Hint = " ",
-				Info = " "
+				Info = " ",
 			}
 			for type, icon in pairs(signs) do
 				local hl = "DiagnosticSign" .. type
@@ -74,95 +98,67 @@ return {
 			})
 
 			-- Setup LSP servers
-			local lspconfig = require("lspconfig")
-
-			-- Lua LSP
-			lspconfig.lua_ls.setup({
-				on_attach = on_attach,
-				capabilities = capabilities,
-				settings = {
-					Lua = {
-						runtime = {
-							version = "LuaJIT",
-						},
-						diagnostics = {
-							globals = { "vim" },
-						},
-						workspace = {
-							library = vim.api.nvim_get_runtime_file("", true),
-						},
-						telemetry = {
-							enable = false,
+			local server_configs = {
+				lua_ls = {
+					settings = {
+						Lua = {
+							runtime = { version = "LuaJIT" },
+							diagnostics = { globals = { "vim" } },
+							workspace = { library = vim.api.nvim_get_runtime_file("", true) },
+							telemetry = { enable = false },
 						},
 					},
 				},
-			})
-
-			-- Python LSP
-			lspconfig.pyright.setup({
-				on_attach = on_attach,
-				capabilities = capabilities,
-			})
-
-			-- TypeScript LSP
-			lspconfig.ts_ls.setup({
-				on_attach = on_attach,
-				capabilities = capabilities,
-			})
-
-			-- Go LSP (if you want to use lspconfig instead of go.nvim)
-			lspconfig.gopls.setup({
-				on_attach = on_attach,
-				capabilities = capabilities,
-				settings = {
-					gopls = {
-						analyses = {
-							unusedparams = true,
-						},
-						staticcheck = true,
-					},
-				},
-			})
-
-			-- Rust LSP
-			lspconfig.rust_analyzer.setup({
-				on_attach = on_attach,
-				capabilities = capabilities,
-				settings = {
-					["rust-analyzer"] = {
-						cargo = {
-							allFeatures = true,
+				gopls = {
+					settings = {
+						gopls = {
+							analyses = {
+								unusedparams = true,
+							},
+							staticcheck = true,
 						},
 					},
 				},
-			})
-
-			-- YAML LSP
-			lspconfig.yamlls.setup({
-				on_attach = on_attach,
-				capabilities = capabilities,
-				settings = {
-					yaml = {
-						schemas = {
-							["https://json.schemastore.org/github-workflow.json"] = "/.github/workflows/*",
-							["https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json"] = "/docker-compose*.yml",
-							["https://json.schemastore.org/kustomization.json"] = "/kustomization.yaml",
-							["https://json.schemastore.org/chart.json"] = "/Chart.yaml",
+				rust_analyzer = {
+					settings = {
+						["rust-analyzer"] = {
+							cargo = {
+								allFeatures = true,
+							},
 						},
 					},
 				},
-			})
-			-- SQL LSP
-			lspconfig.sqlls.setup({
-				on_attach = on_attach,
-				capabilities = capabilities,
-			})
+				yamlls = {
+					settings = {
+						yaml = {
+							schemas = {
+								["https://json.schemastore.org/github-workflow.json"] = "/.github/workflows/*",
+								["https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json"] = "/docker-compose*.yml",
+								["https://json.schemastore.org/kustomization.json"] = "/kustomization.yaml",
+								["https://json.schemastore.org/chart.json"] = "/Chart.yaml",
+							},
+						},
+					},
+				},
+			}
 
-			-- Markdown LSP
-			lspconfig.marksman.setup({
-				on_attach = on_attach,
-				capabilities = capabilities,
-			})
+			local servers_to_setup = {
+				"lua_ls",
+				"pyright",
+				"ts_ls",
+				"gopls",
+				"rust_analyzer",
+				"yamlls",
+				"sqlls",
+				"marksman",
+			}
+
+			for _, server_name in ipairs(servers_to_setup) do
+				local config = server_configs[server_name] or {}
+				config.on_attach = on_attach
+				config.capabilities = capabilities
+				vim.lsp.config(server_name, config)
+			end
 		end,
 	},
 	{
@@ -232,17 +228,17 @@ return {
 			cmp.setup.cmdline({ "/", "?" }, {
 				mapping = cmp.mapping.preset.cmdline(),
 				sources = {
-					{ name = "buffer" }
-				}
+					{ name = "buffer" },
+				},
 			})
 
 			cmp.setup.cmdline(":", {
 				mapping = cmp.mapping.preset.cmdline(),
 				sources = cmp.config.sources({
-					{ name = "path" }
+					{ name = "path" },
 				}, {
-					{ name = "cmdline" }
-				})
+					{ name = "cmdline" },
+				}),
 			})
 		end,
 	},
